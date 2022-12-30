@@ -1,6 +1,8 @@
 package com.anubhav.blog.payloads;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.ManyToOne;
 
@@ -29,5 +31,7 @@ public class PostDto {
 	private CategortDto category;
 
 	private UserDto user;
+	
+	private Set<CommentDto> comments = new HashSet<>();
 
 }
