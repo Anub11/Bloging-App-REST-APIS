@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.anubhav.blog.exceptions.ApiException;
 import com.anubhav.blog.payloads.JwtAuthRequest;
 import com.anubhav.blog.payloads.JwtAuthResponse;
 import com.anubhav.blog.security.JwtTokenHelper;
@@ -55,7 +56,7 @@ public class AuthController {
 		try {
 			authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 		} catch (Exception e) {
-			throw new Exception("Invalid username and password!");
+			throw new ApiException("Invalid username and password!");
 		}
 		
 		
