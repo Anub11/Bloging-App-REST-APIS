@@ -57,9 +57,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //		.and()
 //		.httpBasic();
 
-		http.csrf().disable().authorizeHttpRequests().antMatchers("/api/auth/login").permitAll().anyRequest()
-				.authenticated().and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEnteryPoint).and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http
+		.csrf()
+		.disable()
+		.authorizeHttpRequests()
+		.antMatchers("/api/auth/**").permitAll()
+		.anyRequest()		
+		.authenticated()
+		.and()
+		.exceptionHandling()
+		.authenticationEntryPoint(jwtAuthenticationEnteryPoint)
+		.and()
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		http.addFilterBefore(this.jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 	}
