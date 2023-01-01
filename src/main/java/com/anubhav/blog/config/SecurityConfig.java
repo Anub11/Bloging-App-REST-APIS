@@ -14,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.anubhav.blog.security.CustomUserDetailService;
 import com.anubhav.blog.security.JwtAuthenticationEnteryPoint;
@@ -36,8 +37,21 @@ import lombok.AllArgsConstructor;
 					// JPA EntityManagerFactory for persistence unit 'default'
 
 @EnableGlobalMethodSecurity(prePostEnabled = true) //for rolebased authentication
+@EnableWebMvc //for swigger
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	
+	public static final String[] PUBLIC_URLS = {
+			
+			"/api/auth/**",
+			"/v3/api-docs",
+			"/v2/api-docs",
+			"/swagger-resources/**",
+			"/swagger-ui/**",
+			"/webjars/**"
+			
+	}; 
+	
 	@Autowired
 	private CustomUserDetailService customUserDetailService;
 
@@ -61,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.csrf()
 		.disable()
 		.authorizeHttpRequests()
-		.antMatchers("/api/auth/**").permitAll()
+		.antMatchers(PUBLIC_URLS).permitAll()
 		.anyRequest()		
 		.authenticated()
 		.and()
