@@ -2,6 +2,7 @@ package com.anubhav.blog.services;
 
 import java.util.List;
 
+import com.anubhav.blog.payloads.ForgotPasswordDto;
 import com.anubhav.blog.payloads.UserDto;
 
 public interface UserService {
@@ -12,6 +13,7 @@ public interface UserService {
 	List<UserDto> getAllUser();
 	void deleteUser(Integer userId);
 	UserDto registerNewUser(UserDto user);
+	ForgotPasswordDto forgotPassword(UserDto user,Integer userId, String ans);
 	
 	
 }

@@ -46,6 +46,8 @@ public class User implements UserDetails{
 	private String password;
 
 	private String about;
+	
+	private String securityAns;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Post> posts = new ArrayList<>();

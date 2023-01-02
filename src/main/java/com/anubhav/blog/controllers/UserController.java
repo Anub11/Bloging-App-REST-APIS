@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anubhav.blog.payloads.ApiResponse;
+import com.anubhav.blog.payloads.ForgotPasswordDto;
 import com.anubhav.blog.payloads.UserDto;
 import com.anubhav.blog.services.UserService;
 
@@ -39,6 +40,7 @@ public class UserController {
 	@PutMapping("/{userId}")
 	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable("userId") Integer uid){
 		UserDto updateUserDto = this.userService.updateUser(userDto, uid);
+		
 		return ResponseEntity.ok(updateUserDto);
 		
 	}
@@ -62,7 +64,11 @@ public class UserController {
 		return ResponseEntity.ok(userService.getUserById(userId));
 	}
 	
-	
+	@PutMapping("/forgotpassword/{userId}/{ans}")
+	public ResponseEntity<ForgotPasswordDto> forgotPassword(@PathVariable Integer userId, @RequestBody UserDto userDto,@PathVariable String ans){
+		ForgotPasswordDto forgotPassword = (ForgotPasswordDto) userService.forgotPassword(userDto, userId, ans);
+		return new ResponseEntity<ForgotPasswordDto>(forgotPassword,HttpStatus.OK);
+	}
 	
 	
 	

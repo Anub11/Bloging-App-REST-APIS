@@ -38,6 +38,8 @@ public class UserDto {
 	@NotEmpty
 	private String about;
 	
+	private String securityAns;
+	
 	private Set<RoleDto> roles = new HashSet<>();
 
 }
